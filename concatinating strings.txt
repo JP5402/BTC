@@ -1,0 +1,23 @@
+// accessing elements of an array
+pragma solidity ^0.5.0; 
+
+// Creating a contract 
+contract Types {
+function concatenateStrings(string memory a, string memory b) public pure returns (string memory) {
+    bytes memory strA = bytes(a);
+    bytes memory strB = bytes(b);
+    string memory concatenated = new string(strA.length + strB.length);
+    bytes memory result = bytes(concatenated);
+
+    uint k = 0;
+    for (uint i = 0; i < strA.length; i++) {
+        result[k] = strA[i];
+        k++;
+    }
+    for (uint j = 0; j < strB.length; j++) {
+        result[k] = strB[j];
+        k++;
+    }
+    return string(result);
+}
+}
