@@ -1,0 +1,90 @@
+// Parent contract
+contract Parent {
+    uint public data;
+
+    function setData(uint _value) public {
+        data = _value;
+    }
+}
+
+// Child contract inheriting from Parent
+contract Child is Parent {
+    function getData() public view returns (uint) {
+        return data;
+    }
+}
+//Single
+
+
+//multi
+// Grandparent contract
+contract Grandparent {
+    uint public grandparentData;
+    
+    function setGrandparentData(uint _value) public {
+        grandparentData = _value;
+    }
+}
+
+// Parent contract inheriting from Grandparent
+contract Parent is Grandparent {
+    uint public parentData;
+
+    function setParentData(uint _value) public {
+        parentData = _value;
+    }
+}
+
+// Child contract inheriting from Parent
+contract Child is Parent {
+    function getChildData() public view returns (uint) {
+        return grandparentData + parentData;
+    }
+}
+
+
+//Palindrome
+function isPalindrome(uint number) public pure returns (bool) {
+    uint originalNumber = number;
+    uint reversedNumber = 0;
+    while (number > 0) {
+        uint digit = number % 10;
+        reversedNumber = reversedNumber * 10 + digit;
+        number = number / 10;
+    }
+    return originalNumber == reversedNumber;
+}
+
+
+//Search
+
+function search(uint[] memory array, uint target) public pure returns (bool) {
+    for (uint i = 0; i < array.length; i++) {
+        if (array[i] == target) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
+// Concatenating
+
+function concatenateStrings(string memory a, string memory b) public pure returns (string memory) {
+    bytes memory strA = bytes(a);
+    bytes memory strB = bytes(b);
+    string memory concatenated = new string(strA.length + strB.length);
+    bytes memory result = bytes(concatenated);
+
+    uint k = 0;
+    for (uint i = 0; i < strA.length; i++) {
+        result[k] = strA[i];
+        k++;
+    }
+    for (uint j = 0; j < strB.length; j++) {
+        result[k] = strB[j];
+        k++;
+    }
+    return string(result);
+}
